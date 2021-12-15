@@ -40,7 +40,7 @@ else
     private List<Root>? _repos;
 
     protected override async Task OnInitializedAsync()
-    {
+    { 
         _repos = await GithubRepoData.GetGithubData();
     }
 }

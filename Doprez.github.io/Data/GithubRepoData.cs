@@ -9,9 +9,14 @@ public class GithubRepoData
 {
     static HttpClient client = new HttpClient();
 
-    public async Task<List<Root>> GetGithubData()
+	public GithubRepoData()
 	{
         client.BaseAddress = new Uri("https://api.github.com");
+    }
+
+	public async Task<List<Root>> GetGithubData()
+	{
+        
 
         // Add an Accept header for JSON format.
         client.DefaultRequestHeaders.Accept.Add(
@@ -25,7 +30,7 @@ public class GithubRepoData
             return await response.Content.ReadFromJsonAsync<List<Root>>();
         }
 
-        else return new List<Root>();
+        else return null;
 	}
 
 }

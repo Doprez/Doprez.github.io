@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace Doprez.github.io.Data;
 
 
-//https://api.github.com/users/doprez/repos
+//https://json2csharp.com/ I freaking love this website just sayin
 public class GithubRepoData
 {
     static HttpClient client = new HttpClient();
@@ -16,9 +16,6 @@ public class GithubRepoData
 
 	public async Task<List<Root>> GetGithubData()
 	{
-        
-
-        // Add an Accept header for JSON format.
         client.DefaultRequestHeaders.Accept.Add(
         new MediaTypeWithQualityHeaderValue("application/json"));
         client.DefaultRequestHeaders.Add("User-Agent", "request");

@@ -97,6 +97,7 @@ a, .btn-link {
         width: 100%;
         display: block;
     }
+}
 
     .blazor-error-boundary::after {
         content: "An error has occurred."

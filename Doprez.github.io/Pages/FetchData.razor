@@ -1,15 +1,15 @@
-﻿@page "/fetchdata"
+﻿@page "/fetchgithubdata"
 
-<PageTitle>Weather forecast</PageTitle>
+<PageTitle>Github Repos</PageTitle>
 
 @using Doprez.github.io.Data
-@inject WeatherForecastService ForecastService
+@inject GithubRepoData GithubRepoData
 
-<h1>Weather forecast</h1>
+<h1>Doprez's Github Repos</h1>
 
-<p>This component demonstrates fetching data from a service.</p>
+<p>My personal Git Repos on my public projects that I test random things with.</p>
 
-@if (forecasts == null)
+@if (_repos == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -18,20 +18,18 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Name</th>
+                <th>CloneUrl</th>
+                <th>Description</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var repo in _repos)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+                    <td>@repo.Name</td>
+                    <td><a href=@repo.CloneUrl>@repo.CloneUrl</a>></td>
+                    <td>@repo.Description</td>
                 </tr>
             }
         </tbody>
@@ -39,10 +37,10 @@ else
 }
 
 @code {
-    private WeatherForecast[]? forecasts;
+    private List<Root>? _repos;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        _repos = await GithubRepoData.GetGithubData();
     }
 }
